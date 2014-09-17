@@ -1,4 +1,5 @@
-﻿using eRestaurant.Entities;
+﻿using eRestaurant.DAL;
+using eRestaurant.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,17 +16,36 @@ namespace eRestaurant.BLL
 
         public int AddWaiter(Waiter item)
         {
-            throw new NotImplementedException();
+            using (RestaurantContext context = new RestaurantContext())
+            {
+                //TODO: Validation of waiter data...
+                var added = context.Waiters.Add(item);
+                context.SaveChanges();
+                return added.WaiterID;
+            }
         }
 
         public void UpdateWaiter(Waiter item)
         {
-
+            using (RestaurantContext context = new RestaurantContext())
+            {
+                //TODO: Validation of waiter data...
+                var attached = context.Waiters.Attach(item);
+                var matchingWithExistingValues = context.Entry<Waiter>(attached);
+                matchingWithExistingValues.State = System.Data.Entity.EntityState.Modified;
+                context.SaveChanges();
+            }
         }
 
         public void DeleteWaiter(Waiter item)
         {
-
+            using (RestaurantContext context = new RestaurantContext())
+            {
+                //TODO: Validation of waiter data...
+                var existing = context.Waiters.Find(item.WaiterID);
+                context.Waiters.Remove(existing);
+                context.SaveChanges();
+            }
         }
 
         #endregion
