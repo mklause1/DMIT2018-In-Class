@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace eRestaurant.Entities
 {
-    class Reservation
+    public class Reservation
     {
         public int ReservationID { get; set; }
         public string CustomerName { get; set; }

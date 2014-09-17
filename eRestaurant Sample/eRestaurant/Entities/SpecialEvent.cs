@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace eRestaurant.Entities
 {
-    class SpecialEvent
+    public class SpecialEvent
     {
         [Key]
         public string EventCode { get; set; }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace eRestaurant.Entities
 {
-    class Bill
+    public class Bill
     {
         public int BillID { get; set; }
         public DateTime BillDate { get; set; }

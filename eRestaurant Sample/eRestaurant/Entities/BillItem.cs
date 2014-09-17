@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace eRestaurant.Entities
 {
-    class BillItem
+    public class BillItem
     {
         [Key, Column(Order = 1)]
         public int BillID { get; set; }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace eRestaurant.BLL
 {
-    class RestaurantAdminController
+    public class RestaurantAdminController
     {
         #region Manage Waiters
 
@@ -54,12 +54,18 @@ namespace eRestaurant.BLL
         
         public List<Waiter> ListAllWaiters()
         {
-            throw new NotImplementedException();
+            using (RestaurantContext context = new RestaurantContext())
+            {
+                return context.Waiters.ToList();
+            }
         }
 
         public Waiter GetWaiter(int waiterId)
         {
-            throw new NotImplementedException();
+            using (RestaurantContext context = new RestaurantContext())
+            {
+                return context.Waiters.Find(waiterId);
+            }
         }
 
         #endregion
