@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace eRestaurant.BLL
 {
+    [DataObject]
     public class RestaurantAdminController
     {
         #region Manage Waiters
