@@ -44,7 +44,7 @@
             <div>
                 <asp:LinkButton runat="server" CommandName="Edit" ID="EditButton" >Edit <span class="glyphicon glyphicon-pencil"></span></asp:LinkButton>
                 &nbsp;&nbsp;
-                <asp:LinkButton runat="server" CommandName="Delete" ID="DeleteButton" >Delete <span class="glyphicon glyphicon-trash"</asp:LinkButton>
+                <asp:LinkButton runat="server" CommandName="Delete" ID="DeleteButton" >Delete <span class="glyphicon glyphicon-trash"></span></asp:LinkButton>
                 &nbsp;&nbsp;&nbsp;
                 <asp:CheckBox Checked='<%# Eval("Active") %>' runat="server" ID="ActiveCheckBox" Enabled="false" Text="Active" />
                 &mdash;
