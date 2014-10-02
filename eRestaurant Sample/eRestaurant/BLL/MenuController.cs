@@ -6,7 +6,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data.Entity;// Needed for the Lambda version of the Include() method
+using System.Data.Entity;
+using eRestaurant.Entities.DTOs;// Needed for the Lambda version of the Include() method
 
 namespace eRestaurant.BLL
 {
@@ -25,7 +26,37 @@ namespace eRestaurant.BLL
 
             }//end using
 
-        }//end List
+        }//end ListMenuItems
+
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public List<Category> ListCategorizedMenuItems()
+        {
+            using (var context = new RestaurantContext())
+            {
+                var data = from cat in context.MenuCategories
+                           orderby cat.Description
+                           select new Category()
+                           {
+                               Description = cat.Description,
+                               MenuItems = from item in cat.Items
+                                           where item.Active
+                                           orderby item.Description
+                                           select new MenuItem()
+                                           {
+                                               Description = item.Description,
+                                               Price = item.CurrentPrice,
+                                               Calories = item.Calories,
+                                               Comment = item.Comment
+                                           }
+
+                           };
+
+
+                return data.ToList();
+
+            }//end using
+
+        }//end ListCategorizedMenuItems
 
     }//end Class
 
