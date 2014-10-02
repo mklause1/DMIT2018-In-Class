@@ -22,14 +22,16 @@
     <asp:Repeater ID="Repeater1" runat="server" DataSourceID="MenuItemDataSource">
         <ItemTemplate>
             <div class="well well-lg">
-            <img src="http://placehold.it/150x100" alt="" /> <%# Eval("Description") %>
+            <h3><img src='<%# "Images/" + Eval("Description") + "-1.png" %>' alt="" /> 
+            <%# Eval("Description") %></h3>
             <asp:Repeater ID="ItemDetailRepeater" runat="server" DataSource='<%# Eval("MenuItems") %>'>
                 <ItemTemplate>
                     <div class="well well-sm">
-                        <%# Eval("Description") %> &mdash;
-                        <%# Eval("Calories") %> &mdash;
-                        <%# ((decimal)Eval("Price")).ToString("C") %>
-                        <br />
+                        <h4>
+                            <%# Eval("Description") %>
+                            <span class="badge"><%# Eval("Calories") %> Calories</span>
+                            <%# ((decimal)Eval("Price")).ToString("C") %>
+                        </h4>
                         <%# Eval("Comment") %>
                     </div>
                 </ItemTemplate>
