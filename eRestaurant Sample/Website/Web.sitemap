@@ -14,10 +14,11 @@
       <siteMapNode url="~/About.aspx" title="History" description="eRestaurant - Our History" />
     </siteMapNode>
     <siteMapNode title="Admin"  description="Managerial Services">
-      <siteMapNode url="~/ManageSpecialEvents.aspx" title="Special Events"  description="Manage the Special Events for Reservations" />
-      <siteMapNode url="~/Tables.aspx" title="Tables"  description="Manage the Restaurant Seating/Tables" />
-      <siteMapNode url="~/Items.aspx" title="Items"  description="Manage the Menu" />
-      <siteMapNode url="~/ManageWaiters.aspx" title="Waiters"  description="Staff Management" />
+      <siteMapNode url="~/Admin/ManageSpecialEvents.aspx" title="Special Events"  description="Manage the Special Events for Reservations" />
+      <siteMapNode url="~/Admin/Tables.aspx" title="Tables"  description="Manage the Restaurant Seating/Tables" />
+      <siteMapNode url="~/Admin/Items.aspx" title="Items"  description="Manage the Menu" />
+      <siteMapNode url="~/Admin/ManageWaiters.aspx" title="Waiters"  description="Staff Management" />
+      <siteMapNode url="~/Admin/ReservationBySpecialEvent.aspx" title="Reservations By SpecialEvent"  description="Select Reservations by Special Events" />
     </siteMapNode>
   </siteMapNode>
 </siteMap>

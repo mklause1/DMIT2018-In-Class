@@ -280,6 +280,83 @@ namespace eRestaurant.BLL
         #endregion
 
 
+        #region Manage Reservations
+
+        #region Command
+
+        [DataObjectMethod(DataObjectMethodType.Insert, false)]
+        public void AddReservation(Reservation item)
+        {
+            using (RestaurantContext context = new RestaurantContext())
+            {
+                var added = context.Reservations.Add(item);
+                context.SaveChanges();
+            }
+        }
+
+        [DataObjectMethod(DataObjectMethodType.Update, false)]
+        public void UpdateReseravtion(Reservation item)
+        {
+            using (RestaurantContext context = new RestaurantContext())
+            {
+                var attached = context.Reservations.Attach(item);
+                var matchingWithExistingValues = context.Entry<Reservation>(attached);
+                matchingWithExistingValues.State = System.Data.Entity.EntityState.Modified;
+                context.SaveChanges();
+            }
+        }
+
+        [DataObjectMethod(DataObjectMethodType.Delete, false)]
+        public void DeleteReservation(Reservation item)
+        {
+            using (RestaurantContext context = new RestaurantContext())
+            {
+                var existing = context.Reservations.Find(item.EventCode);
+                context.Reservations.Remove(existing);
+                context.SaveChanges();
+            }
+        }
+
+        #endregion
+
+        #region Query
+
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public List<Reservation> ListAllReservations()
+        {
+            using (RestaurantContext context = new RestaurantContext())
+            {
+                return context.Reservations.ToList();
+            }
+        }
+
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public List<Reservation> ListReservationsBySpecialID(string SpecialEventID)
+        {
+            using (RestaurantContext context = new RestaurantContext())
+            {
+                var result = from ReservationsBySpecialEvent in context.Reservations
+                             where ReservationsBySpecialEvent.EventCode == SpecialEventID
+                             select ReservationsBySpecialEvent;
+
+                return result.ToList();
+            }
+        }
+
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public Reservation GetReservation(int reservationId)
+        {
+            using (RestaurantContext context = new RestaurantContext())
+            {
+                return context.Reservations.Find(reservationId);
+            }
+        }
+
+        #endregion
+
+        #endregion
+
+
     }//end Class
 
 }//end namespace
