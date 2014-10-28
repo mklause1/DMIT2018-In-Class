@@ -53,3 +53,32 @@ var step2 = from data in step1.ToList()// .ToList() forces the first result set 
 								select info
 			};
 step2.Dump("Step 2 of my queries - unioning the result");
+
+// Step 3 - Get just the first CommonBilling item
+//			(presumes no overlap can occur - i.e., two groups at the same table at the same tiem)
+var step3 = from data in step2
+			select new
+			{
+				Table = data.Table,
+				Seating = data.Seating,
+				Taken = data.CommonBilling.Count() > 0,
+				// .FirstOrDefault() is effectively "flattening" my collection of 1 item into a
+				// single object whose properties I can get in step 4 by using the dot (.) operator
+				CommonBilling = data.CommonBilling.FirstOrDefault()
+			};
+step3.Dump("Step 3 in my query - pull out the first (only) item from the common billing list");
+
+// Step 4 - Build our intended seating summary info
+var step4 = from data in step 3
+			select new // SeatingSummary() // my DTO
+			{
+				Table = data.Table,
+				Seating = data.Seating,
+				Taken = data.Taken,
+				// use a ternary expression to conditionally get the bill id (if it exists)
+				BillID = data.Taken ?				// if(data.Taken)
+						data.CommonBilling.BillID	// value to use if true
+						: (int?) null				// value to use if false
+			};
+			step4.Dump("Step 4 - my final results that I need for the form");
+
