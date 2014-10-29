@@ -1,6 +1,6 @@
 <Query Kind="Statements">
   <Connection>
-    <ID>0db6b925-4cd7-49a3-8ca1-53049026cabf</ID>
+    <ID>365fe964-c4f2-4663-a8eb-14a24d4a7216</ID>
     <Persist>true</Persist>
     <Server>.</Server>
     <Database>eRestaurant</Database>
@@ -49,8 +49,15 @@ var step2 = from data in step1.ToList()// .ToList() forces the first result set 
 			{
 				Table = data.Table,
 				Seating = data.Seating,
-				CommonBillig = from info in data.Bills.Union(data.Reservations)
-								select info
+				CommonBilling = from info in data.Bills.Union(data.Reservations)
+								// changed to get only needed info, not entire entity
+								select new
+				{
+					BillID = info.BillID,
+					BillTotal = info.BillItems.Sum(bi => bi.Quantity * bi.SalePrice),
+					Waiter = info.Waiter.FirstName,
+					Reservation = info.Reservation
+				}
 			};
 step2.Dump("Step 2 of my queries - unioning the result");
 
@@ -69,7 +76,7 @@ var step3 = from data in step2
 step3.Dump("Step 3 in my query - pull out the first (only) item from the common billing list");
 
 // Step 4 - Build our intended seating summary info
-var step4 = from data in step 3
+var step4 = from data in step3
 			select new // SeatingSummary() // my DTO
 			{
 				Table = data.Table,
@@ -78,7 +85,13 @@ var step4 = from data in step 3
 				// use a ternary expression to conditionally get the bill id (if it exists)
 				BillID = data.Taken ?				// if(data.Taken)
 						data.CommonBilling.BillID	// value to use if true
-						: (int?) null				// value to use if false
+						: (int?) null,				// value to use if false
+				BillTotal = data.Taken ?
+							data.CommonBilling.BillTotal : (decimal?) null,
+				Waiter = data.Taken ? data.CommonBilling.Waiter : (string) null,
+				ReservationName = data.Taken ?
+									(data.CommonBilling.Reservation != null ?
+									data.CommonBilling.Reservation.CustomerName : (string) null)
+									: (string) null
 			};
-			step4.Dump("Step 4 - my final results that I need for the form");
-
+step4.Dump("Step 4 - my final results that I need for the form");
