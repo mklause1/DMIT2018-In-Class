@@ -7,6 +7,10 @@
   </Connection>
 </Query>
 
+/* These statements are to build a report of income and # customers per day
+*  in a given month/year. 
+*/
+
 // Get the following from the Bills table for the current Month:
 // BillDate, ID, # people served, total amount billed
 // Then, Display the total income for the month and the number of customers served
@@ -16,19 +20,17 @@ var month = DateTime.Today.Month - 1; // previous month
 var year = DateTime.Today.Year; // current year
 
 // 1) Get the bill data for the month/year with a sum of each Bill's BillItems
-var billsInMonth = 	from item in Bills
-					where item.PaidStatus // Only bills that are paid
-						&& item.BillDate.Month == month
-						&& item.BillDate.Year == year
-					orderby item.BillDate
-					select new
-					{
-						BillDate = item.BillDate,
-						BillId = item.BillID,
-						NumberOfCustomers = item.NumberInParty,
-						TotalAmount = item.BillItems.Sum(bi => bi.Quantity * bi.SalePrice)
-					};
-//billsInMonth.Dump();
+var billsInMonth = 	from info in Bills
+					where info.BillDate.Month == month
+                   	&& info.BillDate.Year == year
+                   	select new
+                    {
+                    	BillDate = info.BillDate,
+                        BillId = info.BillID,
+                        NumberOfCustomers = info.NumberInParty,
+                       	TotalAmount = info.BillItems.Sum(bi => bi.Quantity * bi.SalePrice)
+                    };
+billsInMonth.Dump("Raw bill data for month/year");
 
 // Temp: some variables for formatting
 var monthName = DateTime.Today.AddMonths(-1).ToString("MMMM");
@@ -46,7 +48,9 @@ var report = 	from item in billsInMonth
 				{
 					Day = dailySummary.Key,
 					DailyCustomers = dailySummary.Sum(grp => grp.NumberOfCustomers),
-					Income = dailySummary.Sum(grp => grp.TotalAmount)
+					Income = dailySummary.Sum(grp => grp.TotalAmount),
+					BillCount = dailySummary.Count(),
+					AveragePerBill = dailySummary.Sum(grp => grp.TotalAmount) / dailySummary.Count()
 				};
 
 report.OrderBy(r => r.Day).Dump("Daily Income");
