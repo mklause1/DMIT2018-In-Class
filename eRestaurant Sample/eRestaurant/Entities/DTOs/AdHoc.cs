@@ -14,6 +14,43 @@ namespace eRestaurant.Entities.DTOs
         A, B, C, D, F
     }
 
+    public enum Country
+    {
+        Canada, SouthKorea
+    }
+
+    public class KoreanSchool
+    {
+        public Grade ConvertToGrade(int percent)
+        {
+            Grade result;
+            if (percent >= 95)
+                result = Grade.A;
+            else if (percent >= 85)
+                result = Grade.B;
+            else
+                result = Grade.F;
+            return result;
+        }
+    }
+
+    public class CanadianSchool
+    {
+        public Grade ConvertToGrade(int percent)
+        {
+            Grade result;
+            if (percent >= 80)
+                result = Grade.A;
+            else if (percent >= 65)
+                result = Grade.B;
+            else if (percent >= 50)
+                result = Grade.C;
+            else
+               result = Grade.F;
+            return result;
+        }
+    }
+
     public class AdHoc : IAdHoc // This class implements IAdHoc interface
     {
         //A class has fields, properties, constructors and methods
