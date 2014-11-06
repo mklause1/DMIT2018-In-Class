@@ -1,6 +1,6 @@
 <Query Kind="Statements">
   <Connection>
-    <ID>365fe964-c4f2-4663-a8eb-14a24d4a7216</ID>
+    <ID>32401dff-6419-4a70-b730-75f6d2186136</ID>
     <Persist>true</Persist>
     <Server>.</Server>
     <Database>eRestaurant</Database>
@@ -14,7 +14,7 @@ var results = 	from info in BillItems
 					CategoryDescription = info.Item.MenuCategory.Description,
 					ItemDescription = info.Item.Description,
 					Quantity = info.Quantity,
-					Price = info.SalePrice,
-					Cost = info.UnitCost
+					Price = info.SalePrice * info.Quantity,
+					Cost = info.UnitCost * info.Quantity
 				};
 results.Dump();
