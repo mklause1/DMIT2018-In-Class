@@ -30,7 +30,37 @@ namespace eRestaurant.Entities.DTOs
             }
         }
 
+
+        #region Navigation properties
+
         public IList<OrderItem> Items { get; set; }
+
+        #endregion
+
+        /* Footnotes:
+*  #1: A labmda expression is just an inline anonymous function  call.
+*      The following lambda expression:
+            Items.Sum(x => x.ItemTotal)
+        
+*      is the same as this inline delegate:
+            Items.Sum(  delegate(OrderItem x)
+                        {
+                            return x.ItemTotal;
+                        }
+                     )
+         
+ *      and the same as:
+            // GetItemTotal is the name of a method; it must be cast because it cannot be automatically inferred
+            Items.Sum((Func<OrderItem, decimal>)GetItemTotal)
+            ...
+            private static decimal GetItemTotal(OrderItem x)
+            {
+                return x.ItemTotal;
+            }
+  
+ * 
+ */
+
     }//end Class
 
 }//end namespace
