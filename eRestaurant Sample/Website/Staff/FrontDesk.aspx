@@ -4,44 +4,16 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" Runat="Server">
 
-    <div class="row col-md-12">
-
-        <h1>Front Desk</h1>
-
     <div class="well">
         <h4>Mock Date/Time</h4>
 
         <div class="pull-right col-md-5">
             Last Billed Date/Time:
-            <asp:Repeater ID="AdHocBillDateRepeater" runat="server" ItemType="System.DateTime" DataSourceID="AdHocBillDateDataSource">
-                <ItemTemplate>
-                    <%# Item.ToShortDateString() %>
-                    &ndash;
-                    <%# Item.ToShortTimeString() %>
-                </ItemTemplate>
-            </asp:Repeater>
+            <asp:Repeater ID="Repeater1" runat="server"></asp:Repeater>
 
-            <asp:ObjectDataSource ID="AdHocBillDateDataSource" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="GetLastBillDateTime" TypeName="eRestaurant.BLL.AdHocController"></asp:ObjectDataSource>
+            <asp:ObjectDataSource ID="AdHocBillDateDataSource" runat="server"></asp:ObjectDataSource>
 
         </div>
-
-        <asp:TextBox ID="SearchDate" runat="server" TextMode="Date" Text="2014-10-16" />
-            <asp:TextBox ID="SearchTime" runat="server" TextMode="Time" Text="13:00" CssClass="clockpicker" />
-            <!-- Additional scripts/styles here -->
-            <script src="../Scripts/clockpicker.js"></script>
-            <script>
-                $('.clockpicker').clockpicker({ donetext: 'Accept' });
-            </script>
-            <link itemprop="url" href="../Content/clockpicker.css" rel="stylesheet" />
-            <link itemprop="url" href="../Content/standalone.css" rel="stylesheet" />
-
-            <asp:LinkButton ID="MockDateTime" runat="server" CssClass="btn btn-primary">Post-back new date/time</asp:LinkButton>
-            <asp:LinkButton ID="MockLastBillingDateTime" runat="server" CssClass="btn btn-default" OnClick="MockLastBillingDateTime_Click">Set to last-billed date/time</asp:LinkButton>
-       
-
-        </div>
-
-        <uc1:MessageUserControl runat="server" ID="MessageUserControl" />
 
     </div>
 
