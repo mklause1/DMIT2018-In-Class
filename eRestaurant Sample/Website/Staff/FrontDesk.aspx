@@ -28,12 +28,12 @@
         <asp:TextBox ID="SearchDate" runat="server" TextMode="Date" Text="2014-10-16" />
             <asp:TextBox ID="SearchTime" runat="server" TextMode="Time" Text="13:00" CssClass="clockpicker" />
             <!-- Additional scripts/styles here -->
-            <script src="../Scripts/clockpicker.js"></script>
+            <script src="../Scripts/src/clockpicker.js"></script>
             <script>
                 $('.clockpicker').clockpicker({ donetext: 'Accept' });
             </script>
-            <link itemprop="url" href="../Content/clockpicker.css" rel="stylesheet" />
-            <link itemprop="url" href="../Content/standalone.css" rel="stylesheet" />
+            <link itemprop="url" href="../Scripts/src/clockpicker.css" rel="stylesheet" />
+            <link itemprop="url" href="../Scripts/src/standalone.css" rel="stylesheet" />
 
             <asp:LinkButton ID="MockDateTime" runat="server" CssClass="btn btn-primary">Post-back new date/time</asp:LinkButton>
             <asp:LinkButton ID="MockLastBillingDateTime" runat="server" CssClass="btn btn-default" OnClick="MockLastBillingDateTime_Click">Set to last-billed date/time</asp:LinkButton>
