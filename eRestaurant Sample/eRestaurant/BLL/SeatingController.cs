@@ -20,6 +20,7 @@ namespace eRestaurant.BLL
         {
             using (var context = new RestaurantContext())
             {
+                // copy & paste/adapt our code from LinqPad
                 var result = from data in context.Reservations
                              where data.ReservationDate.Year == date.Year
                                  && data.ReservationDate.Month == date.Month
