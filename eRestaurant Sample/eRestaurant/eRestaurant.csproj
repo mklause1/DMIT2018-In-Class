@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL\AdHocController.cs" />
+    <Compile Include="BLL\BusinessRuleException.cs" />
     <Compile Include="BLL\DTO.cs" />
     <Compile Include="BLL\MenuController.cs" />
     <Compile Include="BLL\ReportsController.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="Entities\DTOs\OrderItem.cs" />
     <Compile Include="Entities\DTOs\ReservationCollection.cs" />
     <Compile Include="Entities\DTOs\ReservationSummary.cs" />
+    <Compile Include="Entities\DTOs\SeatingSummary.cs" />
     <Compile Include="Entities\Item.cs" />
     <Compile Include="Entities\MenuCategory.cs" />
     <Compile Include="Entities\Reservation.cs" />

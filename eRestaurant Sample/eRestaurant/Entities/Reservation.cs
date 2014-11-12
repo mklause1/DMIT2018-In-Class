@@ -28,6 +28,7 @@ namespace eRestaurant.Entities
 
         public virtual SpecialEvent Event { get; set; }
         public virtual ICollection<Table> Tables { get; set; }
+        public virtual ICollection<Bill> Bills { get; set; }
 
         #endregion
     }//end Class
